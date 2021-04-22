@@ -28,7 +28,7 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
     throw new Error('Error: endTime cannot be before startTime');
   }
 
-  const hoursWorked = endTimeHour - startTimeHour;
+  const hoursWorked = endTimeHour - startTimeHour - (Number(endTimeObject.minute() < startTimeObject.minute()));
 
   return hoursWorked * families[familyCode]["5:00PM"];
 }
