@@ -7,6 +7,8 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
     throw new Error('Error: 3 arguments required, start time, end time and family code letter');
   } else if (!dayjs(startTime, acceptedTimeFormat, true).isValid()) {
     throw new Error('Error: start time must be a time string of hours and minutes and ante or post meridiem');
+  } else if (!dayjs(endTime, acceptedTimeFormat, true).isValid()) {
+    throw new Error('Error: end time must be a time string of hours and minutes and ante or post meridiem')
   }
   
   return 0.00;
