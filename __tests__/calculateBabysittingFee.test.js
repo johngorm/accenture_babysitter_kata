@@ -1,4 +1,3 @@
-import { expect } from '@jest/globals';
 import calculateBabysittingFee from '../src/calculateBabysittingFee'
 describe('calculateBabysittingFee', () => {
   test('should exist', () => {
@@ -10,39 +9,59 @@ describe('calculateBabysittingFee', () => {
       expect(typeof output).toEqual('number');
   });
 
-  test('function throws error if missing any of the three required inputs', () => {
-    expect.assertions(1);
-    try {
-      calculateBabysittingFee();
-    } catch (e) {
-      expect(e.message).toEqual('Error: 3 arguments required, start time, end time and family code letter');
-    }
-  });
+  describe('error handling', () => {
+    test('function throws error if missing any of the three required inputs', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee();
+      } catch (e) {
+        expect(e.message).toEqual('Error: 3 arguments required, start time, end time and family code letter');
+      }
+    });
+  
+    test('function throws error if startTime can not be parsed as appropriate format (h:mmA)', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee("asdf", "4:00PM", 'A');
+      } catch (e) {
+        expect(e.message).toEqual('Error: start time must be a time string of hours and minutes and ante or post meridiem');
+      }
+    });
+  
+    test('function throws error if endTime can not be parsed as appropriate format (h:mmA)', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee("6:30PM", 'asdf', 'B');
+      } catch (e) {
+        expect(e.message).toEqual('Error: end time must be a time string of hours and minutes and ante or post meridiem');
+      }
+    });
+  
+    test('function throws error if familyCode is not valid', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee("7:00PM", "2:00AM", 'z');
+      } catch (e) {
+        expect(e.message).toEqual('Error: must enter valid family code (A, B, or C)');
+      }
+    });
+    
+    test('function throws error if startTime is not within valid timerange', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee("3:00PM", "12:00AM", 'A');
+      } catch (e) {
+        expect(e.message).toEqual('Error: time range must be between 5:00PM and 4:00AM');
+      }
+    });
 
-  test('function throws error if startTime can not be parsed as appropriate format (h:mmA)', () => {
-    expect.assertions(1);
-    try {
-      calculateBabysittingFee("asdf", "4:00PM", 'A');
-    } catch (e) {
-      expect(e.message).toEqual('Error: start time must be a time string of hours and minutes and ante or post meridiem');
-    }
-  });
-
-  test('function throws error if endTime can not be parsed as appropriate format (h:mmA)', () => {
-    expect.assertions(1);
-    try {
-      calculateBabysittingFee("6:30PM", 'asdf', 'B');
-    } catch (e) {
-      expect(e.message).toEqual('Error: end time must be a time string of hours and minutes and ante or post meridiem');
-    }
-  });
-
-  test('function throws error if familyCode is not valid', () => {
-    expect.assertions(1);
-    try {
-      calculateBabysittingFee("7:00PM", "2:00AM", 'z');
-    } catch (e) {
-      expect(e.message).toEqual('Error: must enter valid family code (A, B, or C)');
-    }
+    test('function throws error if endTime is not within valid timerange', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee("6:00PM", "5:00AM", 'B');
+      } catch (e) {
+        expect(e.message).toEqual('Error: time range must be between 5:00PM and 4:00AM')
+      }
+    });
   });
 });

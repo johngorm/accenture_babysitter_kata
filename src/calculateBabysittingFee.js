@@ -3,17 +3,28 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 dayjs.extend(customParseFormat);
 const acceptedTimeFormat = 'h:mmA';
 const acceptedFamilyCodes = ['A', 'B', 'C'];
+
+const isHourValid = hourInt => {
+  return (hourInt >= 17 || hourInt <= 4);
+};
+
 const calculateBabysittingFee = (startTime, endTime, familyCode) => {
+  const startTimeObject = dayjs(startTime, acceptedTimeFormat, true);
+  const endTimeObject = dayjs(endTime, acceptedTimeFormat, true);
+  const startTimeHour = startTimeObject.hour();
+  const endTimeHour = endTimeObject.hour();
   if (startTime === undefined ||  endTime === undefined || familyCode === undefined) {
     throw new Error('Error: 3 arguments required, start time, end time and family code letter');
-  } else if (!dayjs(startTime, acceptedTimeFormat, true).isValid()) {
+  } else if (!startTimeObject.isValid()) {
     throw new Error('Error: start time must be a time string of hours and minutes and ante or post meridiem');
-  } else if (!dayjs(endTime, acceptedTimeFormat, true).isValid()) {
+  } else if (!endTimeObject.isValid()) {
     throw new Error('Error: end time must be a time string of hours and minutes and ante or post meridiem')
   } else if (!acceptedFamilyCodes.includes(familyCode)) {
     throw new Error('Error: must enter valid family code (A, B, or C)')
-  }
-  
+  } else if (!isHourValid(startTimeHour) || !isHourValid(endTimeHour)) {
+    throw new Error('Error: time range must be between 5:00PM and 4:00AM')
+  } 
+
   return 0.00;
 }
 
