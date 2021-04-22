@@ -5,7 +5,7 @@ const acceptedTimeFormat = 'h:mmA';
 const acceptedFamilyCodes = ['A', 'B', 'C'];
 
 const isHourValid = hourInt => {
-  return (hourInt >= 17 || hourInt <= 4);
+  return (hourInt >= 17 || hourInt < 4);
 };
 
 const calculateBabysittingFee = (startTime, endTime, familyCode) => {
@@ -22,8 +22,10 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
   } else if (!acceptedFamilyCodes.includes(familyCode)) {
     throw new Error('Error: must enter valid family code (A, B, or C)')
   } else if (!isHourValid(startTimeHour) || !isHourValid(endTimeHour)) {
-    throw new Error('Error: time range must be between 5:00PM and 4:00AM')
-  } 
+    throw new Error('Error: time range must be between 5:00PM and 4:00AM');
+  } else if (startTimeHour > endTimeHour && endTimeHour >= 4) {
+    throw new Error('Error: endTime cannot be before startTime');
+  }
 
   return 0.00;
 }

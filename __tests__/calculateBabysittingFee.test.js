@@ -63,5 +63,13 @@ describe('calculateBabysittingFee', () => {
         expect(e.message).toEqual('Error: time range must be between 5:00PM and 4:00AM')
       }
     });
+    test('function throws error if endTime is before startTime', () => {
+      expect.assertions(1);
+      try {
+        calculateBabysittingFee('7:00PM', '6:00PM',  'A');
+      } catch (e) {
+        expect(e.message).toEqual('Error: endTime cannot be before startTime');
+      }
+    });
   });
 });
