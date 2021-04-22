@@ -1,4 +1,5 @@
-import calculateBabysittingFee from '../src/calculateBabysittingFee'
+import calculateBabysittingFee from '../src/calculateBabysittingFee';
+import families from '../src/families';
 describe('calculateBabysittingFee', () => {
   test('should exist', () => {
     expect(calculateBabysittingFee).toBeDefined();
@@ -7,6 +8,14 @@ describe('calculateBabysittingFee', () => {
   test('returns a number', () => {
     const output = calculateBabysittingFee('6:00PM', '10:00PM', 'A');
       expect(typeof output).toEqual('number');
+  });
+
+  test('returns dollar value for hours worked at family rate that does not cross time blocks', () => {
+    const familyCode = 'A';
+    const startTime = "6:00PM";
+    const endTime = "9:00PM";
+    const expectedPayment = 3 * families[familyCode]["5:00PM"];
+    expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
   });
 
   describe('error handling', () => {

@@ -1,5 +1,6 @@
 import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
+import families from './families';
 dayjs.extend(customParseFormat);
 const acceptedTimeFormat = 'h:mmA';
 const acceptedFamilyCodes = ['A', 'B', 'C'];
@@ -27,7 +28,9 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
     throw new Error('Error: endTime cannot be before startTime');
   }
 
-  return 0.00;
+  const hoursWorked = endTimeHour - startTimeHour;
+
+  return hoursWorked * families[familyCode]["5:00PM"];
 }
 
 export default calculateBabysittingFee;
