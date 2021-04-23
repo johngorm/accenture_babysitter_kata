@@ -1,4 +1,3 @@
-import { expect } from '@jest/globals';
 import calculateBabysittingFee from '../src/calculateBabysittingFee.js';
 import families from '../src/families';
 describe('calculateBabysittingFee', () => {
@@ -40,6 +39,14 @@ describe('calculateBabysittingFee', () => {
     const startTime = "9:45PM";
     const endTime = "4:00AM";
     const expectedPayment = 15 * 6;
+    expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
+  });
+ 
+  test('returns dollar value for hours worked if all after midnight', () => {
+    const familyCode = 'B';
+    const startTime = "1:00AM";
+    const endTime = "2:45AM";
+    const expectedPayment = 16;
     expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
   });
 
