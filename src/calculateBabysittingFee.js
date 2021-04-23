@@ -28,9 +28,16 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
     throw new Error('Error: endTime cannot be before startTime');
   }
 
-  const hoursWorked = endTimeHour - startTimeHour - (Number(endTimeObject.minute() < startTimeObject.minute()));
+  let hoursWorked = endTimeHour - startTimeHour - (Number(endTimeObject.minute() < startTimeObject.minute()));
   const selectedFamilyRates = families[familyCode];
-  return selectedFamilyRates[5] + selectedFamilyRates[6] + selectedFamilyRates[7];
+  let startHour = parseInt(startTime.split(':')[0]);
+  let total = 0;
+  while (hoursWorked > 0) {
+    total += selectedFamilyRates[startHour];
+    startHour += 1;
+    hoursWorked--;
+  }
+  return total;
 }
 
 export default calculateBabysittingFee;
