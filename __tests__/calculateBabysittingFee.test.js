@@ -1,5 +1,5 @@
 import calculateBabysittingFee from '../src/calculateBabysittingFee';
-import families from '../src/families';
+import familyRatesPerHour from '../src/familyRatesPerHour';
 describe('calculateBabysittingFee', () => {
   test('should exist', () => {
     expect(calculateBabysittingFee).toBeDefined();
@@ -14,7 +14,7 @@ describe('calculateBabysittingFee', () => {
     const familyCode = 'A';
     const startTime = "6:00PM";
     const endTime = "9:00PM";
-    const expectedPayment = 3 * families[familyCode][5];
+    const expectedPayment = 3 * familyRatesPerHour[familyCode][5];
     expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
   });
 

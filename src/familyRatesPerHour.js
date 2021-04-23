@@ -1,4 +1,4 @@
-const families = {
+const familyRatesPerHour = {
   A: {
     5: 15,
     6: 15,
@@ -40,4 +40,4 @@ const families = {
   }
 };
 
-export default families;
+export default familyRatesPerHour;

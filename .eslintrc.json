@@ -10,5 +10,8 @@
         "sourceType": "module"
     },
     "rules": {
+        "no-unused-vars": 1,
+        "no-duplicate-imports": 2,
+        "sort-imports": 1
     }
 }
