@@ -33,7 +33,15 @@ describe('calculateBabysittingFee', () => {
     const endTime = "11:30PM";
     const expectedPayment = 12 * 4 + 8;
     expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
-  })
+  });
+
+  test('returns correct value for hours worked overnight into next day', () => {
+    const familyCode = 'C';
+    const startTime = "9:45PM";
+    const endTime = "4:00AM";
+    const expectedPayment = 15 * 6;
+    expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
+  });
 
   describe('error handling', () => {
     test('function throws error if missing any of the three required inputs', () => {
