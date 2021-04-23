@@ -1,6 +1,6 @@
 import dayjs from 'dayjs';
-import customParseFormat from 'dayjs/plugin/customParseFormat';
-import families from './families';
+import customParseFormat from 'dayjs/plugin/customParseFormat.js';
+import families from './families.js';
 dayjs.extend(customParseFormat);
 const acceptedTimeFormat = 'h:mmA';
 const acceptedFamilyCodes = ['A', 'B', 'C'];
