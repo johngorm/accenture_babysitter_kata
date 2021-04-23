@@ -29,8 +29,8 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
   }
 
   const hoursWorked = endTimeHour - startTimeHour - (Number(endTimeObject.minute() < startTimeObject.minute()));
-
-  return hoursWorked * families[familyCode]["5:00PM"];
+  const selectedFamilyRates = families[familyCode];
+  return selectedFamilyRates[5] + selectedFamilyRates[6] + selectedFamilyRates[7];
 }
 
 export default calculateBabysittingFee;

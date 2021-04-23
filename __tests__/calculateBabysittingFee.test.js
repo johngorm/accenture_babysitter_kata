@@ -1,5 +1,5 @@
 import { expect } from '@jest/globals';
-import calculateBabysittingFee from '../src/calculateBabysittingFee';
+import calculateBabysittingFee from '../src/calculateBabysittingFee.js';
 import families from '../src/families';
 describe('calculateBabysittingFee', () => {
   test('should exist', () => {
@@ -15,17 +15,9 @@ describe('calculateBabysittingFee', () => {
     const familyCode = 'A';
     const startTime = "6:00PM";
     const endTime = "9:00PM";
-    const expectedPayment = 3 * families[familyCode]["5:00PM"];
+    const expectedPayment = 3 * families[familyCode][5];
     expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
   });
-
-  test('returns dollar value for only whole hours worked', () => {
-    const familyCode = 'A';
-    const startTime = "7:30PM";
-    const endTime = "8:29PM";
-    const expectedPayment = 0;
-    expect(calculateBabysittingFee(startTime, endTime, familyCode)).toEqual(expectedPayment);
-  })
 
   describe('error handling', () => {
     test('function throws error if missing any of the three required inputs', () => {

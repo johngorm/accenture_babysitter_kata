@@ -7,10 +7,12 @@
     "test": "jest",
     "test:watch": "jest --watchAll"
   },
+  "type": "module",
   "jest": {
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "src/*.js"
+      "src/*.js",
+      "src/*.mjs"
     ],
     "coverageDirectory": "coverage",
     "coverageReporters": [

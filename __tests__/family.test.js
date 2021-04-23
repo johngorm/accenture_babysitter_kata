@@ -1,9 +1,9 @@
 import familyRateTimeBlocks from '../src/families';
 describe('familyRates', () => {
   test('should have correct number of rates based on time blocks for family A,B, and C', () => {
-    expect(Object.keys(familyRateTimeBlocks.A).length).toEqual(2);
-    expect(Object.keys(familyRateTimeBlocks.B).length).toEqual(3);
-    expect(Object.keys(familyRateTimeBlocks.C).length).toEqual(2);
+    expect(Object.keys(familyRateTimeBlocks.A).length).toEqual(11);
+    expect(Object.keys(familyRateTimeBlocks.B).length).toEqual(11);
+    expect(Object.keys(familyRateTimeBlocks.C).length).toEqual(11);
   });
 
   test('each family start time should have a numerical rate', () => {
