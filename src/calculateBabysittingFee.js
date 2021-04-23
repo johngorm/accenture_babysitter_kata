@@ -34,13 +34,13 @@ const calculateBabysittingFee = (startTime, endTime, familyCode) => {
   if (hoursWorked < 0) {
     hoursWorked += 24;
   }
-  let startHour = parseInt(startTime);
+  let hourIterator = parseInt(startTime);
   let total = 0;
   while (hoursWorked > 0) {
-    total += selectedFamilyRates[startHour];
-    startHour += 1;
-    if (startHour > 12) {
-      startHour %= 12;
+    total += selectedFamilyRates[hourIterator];
+    hourIterator += 1;
+    if (hourIterator > 12) {
+      hourIterator %= 12;
     }
     hoursWorked--;
   }
