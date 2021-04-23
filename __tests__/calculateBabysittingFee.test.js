@@ -1,4 +1,4 @@
-import calculateBabysittingFee from '../src/calculateBabysittingFee.js';
+import calculateBabysittingFee from '../src/calculateBabysittingFee';
 import families from '../src/families';
 describe('calculateBabysittingFee', () => {
   test('should exist', () => {
